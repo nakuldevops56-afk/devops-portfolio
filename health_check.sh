@@ -37,6 +37,14 @@ echo "5. Disk Usage:"
 df -h /
 check_status $? "df"
 
+DISK_USAGE=$(df -P / | awk 'NR==2 {gsub("%","",$5); print $5}')
+
+if [ "$DISK_USAGE" -ge 80 ]; then
+    echo "WARNING: Disk usage is ${DISK_USAGE}% (threshold: 80%)"
+else
+    echo "Disk usage is normal: ${DISK_USAGE}%"
+fi
+
 echo ""
 echo "=================================="
 echo "       Health Check Complete"
