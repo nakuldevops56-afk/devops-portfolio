@@ -37,10 +37,15 @@ echo "5. Disk Usage:"
 df -h /
 check_status $? "df"
 
+THRESHOLD=${1:-80}
+if ! [[ "$THRESHOLD" =~ ^[0-9]+$ ]] || [ "$THRESHOLD" -lt 1 ] || [ "$THRESHOLD" -gt 100 ]; then
+    echo "ERROR: Threshold must be a number between 1 and 100."
+    exit 1
+fi
 DISK_USAGE=$(df -P / | awk 'NR==2 {gsub("%","",$5); print $5}')
 
-if [ "$DISK_USAGE" -ge 80 ]; then
-    echo "WARNING: Disk usage is ${DISK_USAGE}% (threshold: 80%)"
+if [ "$DISK_USAGE" -ge "$THRESHOLD" ]; then	
+    echo "WARNING: Disk usage is ${DISK_USAGE}% (threshold: ${THRESHOLD}%)"
 else
     echo "Disk usage is normal: ${DISK_USAGE}%"
 fi
