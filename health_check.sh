@@ -44,8 +44,9 @@ if ! [[ "$THRESHOLD" =~ ^[0-9]+$ ]] || [ "$THRESHOLD" -lt 1 ] || [ "$THRESHOLD" 
 fi
 DISK_USAGE=$(df -P / | awk 'NR==2 {gsub("%","",$5); print $5}')
 
-if [ "$DISK_USAGE" -ge "$THRESHOLD" ]; then	
+if [ "$DISK_USAGE" -ge "$THRESHOLD" ]; then
     echo "WARNING: Disk usage is ${DISK_USAGE}% (threshold: ${THRESHOLD}%)"
+    exit 1
 else
     echo "Disk usage is normal: ${DISK_USAGE}%"
 fi
