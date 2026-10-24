@@ -96,8 +96,7 @@ cat health_check.log
 ```text
 devops-portfolio/
 ├── health_check.sh
-├── README.md
-└── health_check.sh.bak
+└── README.md
 ```
 
 ## Future Improvements
