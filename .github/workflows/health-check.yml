@@ -1,0 +1,31 @@
+name: Linux Health Check CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Validate Shell Syntax
+        run: |
+          bash -n health_check.sh
+          bash -n test_health_check.sh
+
+      - name: Run Automated Tests
+        run: |
+          chmod +x health_check.sh test_health_check.sh
+          ./test_health_check.sh
+
+      - name: Run Health Check
+        run: ./health_check.sh 100 100
+
