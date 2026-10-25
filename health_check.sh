@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Linux Server Health Check
