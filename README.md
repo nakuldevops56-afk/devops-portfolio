@@ -23,6 +23,10 @@ A Linux Server Health Check tool built using Bash scripting. It monitors importa
 - Bash Scripting
 - Git
 - GitHub
+- Docker
+- GitHub Actions
+- Jenkins
+- CI/CD
 
 ## Requirements
 
@@ -106,3 +110,64 @@ devops-portfolio/
 - Jenkins pipeline integration
 - Monitoring multiple filesystems
 
+
+## Docker Usage
+
+The Linux Health Check script is also available as a Docker image.
+
+### Pull Docker Image
+
+```bash
+docker pull nakul2047/linux-health-check:latest
+```
+
+### Run Docker Container
+
+```bash
+docker run --rm nakul2047/linux-health-check:latest 100 100
+```
+
+### Custom Thresholds
+
+```bash
+docker run --rm nakul2047/linux-health-check:latest 90 80
+```
+
+- First argument: Disk usage threshold
+- Second argument: CPU usage threshold
+
+Docker Hub Image: https://hub.docker.com/r/nakul2047/linux-health-check
+
+## CI/CD Pipeline
+
+This project uses GitHub Actions to automate the CI/CD process.
+
+On every push to the `main` branch, the workflow:
+
+1. Checks out the source code.
+2. Validates Bash script syntax.
+3. Runs automated tests.
+4. Executes the health check script.
+5. Builds the Docker image.
+6. Pushes the Docker image to Docker Hub.
+
+Workflow file: `.github/workflows/health-check.yml`
+
+## Project Structure
+
+```text
+devops-portfolio/
+├── .github/
+│   └── workflows/
+│       └── health-check.yml
+├── Dockerfile
+├── Jenkinsfile
+├── health_check.sh
+├── test_health_check.sh
+├── README.md
+└── .gitignore
+```
+
+## Author
+
+DevOps Portfolio Project
